@@ -122,10 +122,14 @@ KiddoPaint.Display.clearLocalStorage = function() {
 KiddoPaint.Display.saveToLocalStorage = function() {
     if (typeof(Storage) != "undefined") {
         try {
-            chrome.storage.local.set({ "kiddopaint": KiddoPaint.Display.main_canvas.toDataURL() });
+            chrome.storage.local.set({
+                "kiddopaint": KiddoPaint.Display.main_canvas.toDataURL()
+            });
         } catch (e) {
             try {
-                chrome.storage.local.set({ "kiddopaint": KiddoPaint.Display.main_canvas.toDataURL("image/jpeg", 0.87) });
+                chrome.storage.local.set({
+                    "kiddopaint": KiddoPaint.Display.main_canvas.toDataURL("image/jpeg", 0.87)
+                });
             } catch (e2) {
                 console.log(e2);
             }
@@ -143,7 +147,9 @@ KiddoPaint.Display.loadFromLocalStorage = function() {
 
     if (typeof(Storage) != "undefined") {
         chrome.storage.local.get("kiddopaint",
-            function({ kiddopaint: storedKiddoPaintData }) {
+            function({
+                kiddopaint: storedKiddoPaintData
+            }) {
                 if (storedKiddoPaintData) {
                     img.src = storedKiddoPaintData;
                 } else {
