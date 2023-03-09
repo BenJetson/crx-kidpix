@@ -1,0 +1,17 @@
+{
+  "name": "KidPix",
+  "description": "A JavaScript clone of the classic drawing application.",
+  "version": "1.0",
+  "manifest_version": 2,
+  "app": {
+    "background": {
+      "scripts": ["js/chrome/background.js"]
+    }
+  },
+  "icons": {
+    "32": "img/kidpix-lrg.png",
+    "128": "img/kidpix-xlrg.png",
+    "256": "img/kidpix-xxlrg.png"
+  },
+  "permissions": ["storage"]
+}
