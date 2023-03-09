@@ -99,6 +99,10 @@ function init_kiddo_paint() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    init_kiddo_paint();
+}, false);
+
 function init_kiddo_defaults() {
     KiddoPaint.Current.color = KiddoPaint.Colors.currentPalette()[0];
     KiddoPaint.Current.altColor = KiddoPaint.Colors.currentPalette()[0];
@@ -472,7 +476,7 @@ function ev_canvas(ev) {
     if (!ev) {
         return;
     }
-    // pre event 
+    // pre event
     KiddoPaint.Display.step += 1;
     KiddoPaint.Display.clearPreview();
     KiddoPaint.Current.ev = ev;
