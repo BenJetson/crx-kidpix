@@ -115,17 +115,17 @@ KiddoPaint.Display.undo = function(doClearMain) {
 
 KiddoPaint.Display.clearLocalStorage = function() {
     if (typeof(Storage) != "undefined") {
-        localStorage.removeItem("kiddopaint");
+        chrome.storage.local.remove("kiddopaint");
     }
 }
 
 KiddoPaint.Display.saveToLocalStorage = function() {
     if (typeof(Storage) != "undefined") {
         try {
-            localStorage.setItem("kiddopaint", KiddoPaint.Display.main_canvas.toDataURL());
+            chrome.storage.local.set({ "kiddopaint": KiddoPaint.Display.main_canvas.toDataURL() });
         } catch (e) {
             try {
-                localStorage.setItem("kiddopaint", KiddoPaint.Display.main_canvas.toDataURL('image/jpeg', 0.87));
+                chrome.storage.local.set({ "kiddopaint": KiddoPaint.Display.main_canvas.toDataURL("image/jpeg", 0.87) });
             } catch (e2) {
                 console.log(e2);
             }
@@ -140,8 +140,17 @@ KiddoPaint.Display.loadFromLocalStorage = function() {
         KiddoPaint.Display.clearMain();
         KiddoPaint.Display.main_context.drawImage(img, 0, 0);
     }
-    if (typeof(Storage) != "undefined" && localStorage.getItem("kiddopaint")) {
-        img.src = localStorage.getItem("kiddopaint");
+
+    if (typeof(Storage) != "undefined") {
+        chrome.storage.local.get("kiddopaint",
+            function({ kiddopaint: storedKiddoPaintData }) {
+                if (storedKiddoPaintData) {
+                    img.src = storedKiddoPaintData;
+                } else {
+                    img.src = "static/splash.png";
+                }
+            }
+        );
     } else {
         img.src = "static/splash.png";
     }
