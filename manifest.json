@@ -2,10 +2,10 @@
   "name": "KidPix",
   "description": "A JavaScript clone of the classic drawing application.",
   "version": "1.0",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "app": {
     "background": {
-      "scripts": ["js/chrome/background.js"]
+      "service_worker": "js/chrome/background.js"
     }
   },
   "icons": {
